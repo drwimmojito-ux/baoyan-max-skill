@@ -266,8 +266,67 @@ a{color:inherit}
 .api-answer{margin-top:16px;padding:15px;border:1px solid #dce6f2;border-radius:9px;background:#f8fafd}
 .api-answer h3{font-size:14px;margin:0 0 10px}
 .api-answer pre{font:12px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere;margin:0;color:#2f425e}
+.search-disclosure,.search-preview-note{border:1px solid #dfe8f4;border-radius:8px;padding:10px 12px;background:#f6f9fe}
+.search-preview-note{border-color:#f1deb0;background:#fff9eb}
+.consult-progress{display:flex;align-items:center;gap:10px;margin:14px 0;padding:12px 14px;border:1px solid #d8e5f6;border-radius:9px;background:#f4f8ff;color:#315d9d;font-size:12px}
+.consult-spinner{width:16px;height:16px;flex:0 0 16px;border:2px solid #c7d8f3;border-top-color:#2864c8;border-radius:50%;animation:consult-spin .8s linear infinite}
+@keyframes consult-spin{to{transform:rotate(360deg)}}
+.consult-web-sources{margin-top:16px;padding-top:12px;border-top:1px solid #e1e8f2}
+.consult-web-sources h4{margin:0 0 8px;font-size:12px;color:#445976}
+.consult-web-sources ol{display:grid;gap:9px;margin:0;padding-left:22px}
+.consult-web-sources a{color:#245db5;font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+.consult-web-sources p{margin:3px 0 0;color:#718099;font-size:11px;line-height:1.55}
+@media(prefers-reduced-motion:reduce){.consult-spinner{animation-duration:1.8s}}
 .api-settings{margin-bottom:15px}
 .api-fields{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin-top:15px}
 .api-fields label{display:grid;gap:6px;font-size:12px;font-weight:700;color:#445976}
 .api-fields input{min-width:0;width:100%;min-height:40px;border:1px solid #d9e3f0;border-radius:8px;padding:9px 11px;background:#fff;color:#203654;outline:none;font-family:inherit;font-size:12px}
 @media(max-width:850px){.consult-grid{grid-template-columns:1fr}}
+.consult-chat-layout{position:relative;min-height:660px;margin-bottom:15px}
+.consult-chat-main{min-height:660px;height:min(76vh,920px);display:flex;flex-direction:column;overflow:hidden;border:1px solid #e2eaf4;border-radius:16px;background:#fff;box-shadow:0 8px 28px #173b700b}
+.consult-chat-meta{height:54px;flex:none;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 74px 0 22px;border-bottom:1px solid #edf1f6;color:#2a3f5f;font-size:13px;font-weight:750}
+.consult-chat-meta small{color:#8794a8;font-size:10px;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:52%}
+.consult-thread{min-height:0;flex:1;overflow:auto;display:flex;flex-direction:column;gap:16px;padding:25px clamp(18px,5vw,76px);scroll-behavior:smooth}
+.chat-welcome{flex:1;min-height:300px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;color:#50627c}
+.chat-welcome-mark{width:44px;height:44px;display:grid;place-items:center;border-radius:15px;background:#eaf2ff;color:#2864d8;font-size:27px}
+.chat-welcome h2{margin:18px 0 5px;font-size:21px;color:#243b5c}
+.chat-welcome p{max-width:460px;margin:0;font-size:13px;line-height:1.7;color:#7a899e}
+.chat-message{width:min(900px,92%);align-self:flex-start;padding:15px 18px;border:1px solid #e6ecf4;border-radius:14px;background:#fbfcfe}
+.chat-message.user{align-self:flex-end;border-color:#dce8fc;background:#f2f7ff}
+.chat-message-role{margin-bottom:7px;color:#657791;font-size:11px;font-weight:750}
+.chat-message pre{margin:0;color:#293d59;font:13px/1.8 Inter,"Microsoft YaHei",system-ui,sans-serif;white-space:pre-wrap;overflow-wrap:anywhere}
+.consult-composer{flex:none;padding:15px 22px 18px;border-top:1px solid #edf1f6;background:#fff}
+.consult-composer>label{display:block;margin:0 0 7px;color:#354b6b;font-size:12px;font-weight:750}
+.consult-composer .consult-textarea.question{min-height:110px;max-height:220px;resize:vertical;font:13px/1.7 Inter,"Microsoft YaHei",system-ui,sans-serif}
+.consult-composer-footer{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-top:10px}
+.consult-composer-footer .search-disclosure,.consult-composer-footer .search-preview-note{max-width:510px;margin:0;color:#687991;font-size:10px;line-height:1.55}
+.consult-composer-actions{display:flex;justify-content:flex-end;align-items:center;flex-wrap:wrap;gap:8px}
+.consult-composer-actions .btn{min-height:38px}
+.consult-profile-rail{position:absolute;z-index:10;top:22px;right:10px}
+.consult-profile-trigger{width:39px;min-height:104px;padding:10px 8px;border:1px solid #dbe5f2;border-radius:12px;background:#fff;color:#315783;font-size:12px;font-weight:750;writing-mode:vertical-rl;box-shadow:0 5px 18px #173b7012}
+.consult-profile-trigger:hover{border-color:#91b4ed;color:#1b5abc}
+.consult-profile-drawer{display:none;position:absolute;top:0;right:48px;width:min(430px,calc(100vw - 390px));max-height:min(76vh,790px);overflow:auto;padding:18px;border:1px solid #dfe7f1;border-radius:14px;background:#fff;box-shadow:0 15px 45px #142b4b26}
+.consult-profile-rail:hover .consult-profile-drawer,.consult-profile-rail:focus-within .consult-profile-drawer,.consult-profile-rail.is-open .consult-profile-drawer{display:block}
+.consult-profile-head{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.consult-profile-head h2{margin:0 0 4px;font-size:17px}
+.consult-profile-head p{margin:0;color:#75849a;font-size:11px;line-height:1.6}
+.consult-profile-drawer>label{display:block;margin:14px 0 7px;color:#445976;font-size:12px;font-weight:700}
+.consult-profile-drawer .consult-textarea{min-height:240px;max-height:48vh;font-size:11px}
+.consult-profile-import{display:grid;gap:8px;margin-top:13px;padding:12px;border-radius:10px;background:#f6f8fc}
+.consult-profile-import label{font-size:12px;font-weight:750;color:#445976}
+.consult-profile-import select{width:100%;min-height:38px;border:1px solid #d9e3f0;border-radius:8px;background:#fff;padding:7px;font-size:11px;color:#405572}
+.consult-profile-import small{font-size:10px;line-height:1.55;color:#77869b}
+.consult-profile-drawer .consult-check{display:flex;align-items:center;gap:8px;margin:13px 0;color:#445976;font-size:11px;cursor:pointer}
+.consult-profile-drawer .consult-actions{margin-bottom:0}
+.consult-history-drawer{position:absolute;z-index:15;left:12px;top:12px;width:min(320px,calc(100% - 60px));max-height:calc(100% - 24px);overflow:auto;padding:13px;border:1px solid #dfe7f1;border-radius:14px;background:#fff;box-shadow:0 15px 45px #142b4b26}
+.consult-history-head{display:flex;justify-content:space-between;align-items:center;padding:1px 2px 10px;color:#324a69;font-size:13px}
+.consult-history-item{width:100%;display:grid;gap:4px;margin:4px 0;padding:10px;text-align:left;border:1px solid transparent;border-radius:9px;background:#f7f9fc;color:#344963}
+.consult-history-item:hover,.consult-history-item.active{border-color:#cbdcf7;background:#eff5ff}
+.consult-history-item strong{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:12px}
+.consult-history-item small{color:#8190a4;font-size:10px}
+.consult-history-empty{padding:18px 7px;color:#8190a4;font-size:12px;text-align:center}
+.chat-error{align-self:center;max-width:90%;padding:10px 14px;border:1px solid #f1d4d4;border-radius:9px;background:#fff6f6;color:#a13b3b;font-size:12px;line-height:1.6}
+.consult-sources summary{cursor:pointer;color:#304967;font-weight:750;font-size:13px}
+.consult-sources[open] summary{margin-bottom:14px}
+@media(max-width:850px){.consult-chat-main{height:auto;min-height:650px}.consult-thread{min-height:390px}.consult-composer-footer{align-items:stretch;flex-direction:column}.consult-composer-actions{justify-content:flex-start}.consult-profile-drawer{width:min(390px,calc(100vw - 75px))}.consult-profile-rail{right:7px}.consult-profile-drawer{right:45px}}
+@media(max-width:520px){.consult-chat-meta{padding:0 13px}.consult-thread{padding:16px 12px}.chat-message{width:96%;padding:12px}.consult-composer{padding:12px}.consult-chat-main{min-height:620px}.consult-composer-actions .btn{flex:1}.consult-profile-drawer .consult-actions{display:grid;grid-template-columns:1fr 1fr}.consult-history-drawer{left:7px}}

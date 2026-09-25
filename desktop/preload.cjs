@@ -4,13 +4,20 @@ contextBridge.exposeInMainWorld('desktopAPI', Object.freeze({
   loadConsult: () => ipcRenderer.invoke('consult:load'),
   loadSources: () => ipcRenderer.invoke('consult:sources'),
   saveProfile: profile => ipcRenderer.invoke('consult:save-profile', profile),
+  saveConsultHistory: (conversations, activeId) => ipcRenderer.invoke('consult:save-history', conversations, activeId),
   saveApiConfig: config => ipcRenderer.invoke('consult:save-api', config),
   clearApiConfig: () => ipcRenderer.invoke('consult:clear-api'),
   clearConsult: () => ipcRenderer.invoke('consult:clear-all'),
   askConsult: request => ipcRenderer.invoke('consult:ask', request),
+  onConsultProgress: callback => {
+    const listener = (_, progress) => callback(progress);
+    ipcRenderer.on('consult:progress', listener);
+    return () => ipcRenderer.removeListener('consult:progress', listener);
+  },
   loadState: () => ipcRenderer.invoke('state:load'),
   saveState: state => ipcRenderer.invoke('state:save', state),
   listFiles: () => ipcRenderer.invoke('files:list'),
+  readFileText: id => ipcRenderer.invoke('files:read-text', id),
   chooseFile: (materialId, replaceId) => ipcRenderer.invoke('files:choose', materialId, replaceId),
   saveFileAs: id => ipcRenderer.invoke('files:save-as', id),
   removeFile: id => ipcRenderer.invoke('files:remove', id),

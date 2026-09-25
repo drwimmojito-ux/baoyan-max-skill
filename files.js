@@ -3,6 +3,7 @@
   if (window.desktopAPI) {
     window.localFiles = {
       list: () => window.desktopAPI.listFiles(),
+      readText: id => window.desktopAPI.readFileText(id),
       choose: (materialId, replaceId) => window.desktopAPI.chooseFile(materialId, replaceId),
       download: id => window.desktopAPI.saveFileAs(id),
       remove: id => window.desktopAPI.removeFile(id),

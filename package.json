@@ -9,6 +9,11 @@
     "dev": "electron ."
   },
   "devDependencies": {
-    "electron": "44.4.5"
+    "electron": "44.4.5",
+    "jszip": "^3.10.2"
+  },
+  "dependencies": {
+    "mammoth": "^1.12.3",
+    "pdf-parse": "^2.4.5"
   }
 }

@@ -1,6 +1,6 @@
 const path = require('node:path');
 const fs = require('node:fs/promises');
-const { app, BrowserWindow, Tray, Menu, Notification, dialog, ipcMain, shell, powerMonitor, safeStorage } = require('electron');
+const { app, BrowserWindow, Tray, Menu, Notification, dialog, ipcMain, shell, powerMonitor, safeStorage, net } = require('electron');
 const { LocalStore } = require('./storage.cjs');
 const { ConsultStore } = require('./consult.cjs');
 
@@ -67,7 +67,7 @@ function createWindow() {
   mainWindow.webContents.setWindowOpenHandler(({ url }) => {
     try {
       const target = new URL(url);
-      if (target.protocol === 'https:' && !target.username && !target.password) shell.openExternal(target.toString());
+      if (['https:', 'http:'].includes(target.protocol) && !target.username && !target.password) shell.openExternal(target.toString());
     } catch { /* 不是可打开的外部链接 */ }
     return { action: 'deny' };
   });
@@ -98,10 +98,13 @@ function registerIpc() {
   ipcMain.handle('consult:load', () => consultStore.publicData());
   ipcMain.handle('consult:sources', async () => JSON.parse(await fs.readFile(path.join(__dirname, '..', 'skills', 'baoyan-advisor', 'references', 'handbooks.json'), 'utf8')));
   ipcMain.handle('consult:save-profile', (_, profile) => consultStore.saveProfile(profile));
+  ipcMain.handle('consult:save-history', (_, conversations, activeId) => consultStore.saveConversations(conversations, activeId));
   ipcMain.handle('consult:save-api', (_, config) => consultStore.saveApiConfig(config));
   ipcMain.handle('consult:clear-api', () => consultStore.clearApiConfig());
   ipcMain.handle('consult:clear-all', () => consultStore.clearAll());
-  ipcMain.handle('consult:ask', (_, request) => consultStore.ask(request));
+  ipcMain.handle('consult:ask', (event, request) => consultStore.ask(request, progress => {
+    if (!event.sender.isDestroyed()) event.sender.send('consult:progress', progress);
+  }));
   ipcMain.handle('state:load', () => store.getState());
   ipcMain.handle('state:save', async (_, state) => {
     await store.saveState(state);
@@ -109,6 +112,7 @@ function registerIpc() {
     return true;
   });
   ipcMain.handle('files:list', () => store.listAttachments());
+  ipcMain.handle('files:read-text', (_, id) => store.readAttachmentText(id));
   ipcMain.handle('files:choose', async (_, materialId, replaceId) => {
     const choice = await dialog.showOpenDialog(mainWindow, { title: replaceId ? '选择替换文件' : '添加材料文件', properties: ['openFile'] });
     if (choice.canceled || !choice.filePaths.length) return null;
@@ -153,7 +157,7 @@ app.whenReady().then(async () => {
   try {
     store = new LocalStore(app.getPath('userData'));
     await store.init();
-    consultStore = new ConsultStore(store.root, safeStorage);
+    consultStore = new ConsultStore(store.root, safeStorage, (...args) => net.fetch(...args));
     await consultStore.init();
     registerIpc();
     createWindow();

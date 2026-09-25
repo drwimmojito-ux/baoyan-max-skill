@@ -69,8 +69,8 @@ function attachedTo(materialId){return attachments.filter(file=>file.materialId=
 function fmtSize(bytes){if(bytes<1024)return `${bytes} B`;if(bytes<1024*1024)return `${(bytes/1024).toFixed(1)} KB`;return `${(bytes/1024/1024).toFixed(1)} MB`;}
 async function refreshAttachments(){try{attachments=await window.localFiles.list();filesReady=true;fileError='';}catch(error){filesReady=false;fileError=error.message||'无法读取本地文件';}render();}
 function render(){
-  const privacy=window.desktopAPI?'<strong>本机独立保存</strong>项目、材料和咨询资料存于当前系统账户。主动发送 AI 咨询时，所选内容会发往配置的服务商。':'<strong>当前浏览器保存</strong>项目、材料和咨询资料存于当前浏览器。主动发送 AI 咨询时，所选内容会发往配置的服务商。';
-  const footer=window.desktopAPI?'本应用不设账号或自建后端。完整备份请从托盘退出后复制设置页所示目录；主动发送 AI 咨询时，问题和所选资料会传给配置的服务商。':'本应用不设账号或自建后端。浏览器清理站点数据可能删除记录；主动发送 AI 咨询时，问题和所选资料会传给配置的服务商。';
+  const privacy=window.desktopAPI?'<strong>本机独立保存</strong>项目、材料、AI 对话历史和咨询资料存于当前系统账户。主动发送咨询时，当前对话历史与本次所选内容会发往配置的 AI 服务商。':'<strong>当前浏览器保存</strong>项目、材料、AI 对话历史和咨询资料存于当前浏览器。主动发送咨询时，当前对话历史与本次所选内容会发往配置的 AI 服务商。';
+  const footer=window.desktopAPI?'本应用不设账号或自建后端。完整备份请从托盘退出后复制设置页所示目录；主动发送 AI 咨询时，当前对话历史和本次所选资料会传给配置的服务商。':'本应用不设账号或自建后端。浏览器清理站点数据可能删除记录；主动发送 AI 咨询时，当前对话历史和本次所选资料会传给配置的服务商。';
   app.innerHTML=`<div class="app"><aside class="sidebar" id="sidebar"><div class="brand"><img class="brand-mark" src="./assets/logo.png" alt="" /><span>保研工作台</span></div><nav class="nav" aria-label="主导航">${NAV.map(([id,label,ic])=>`<button type="button" class="nav-btn ${page===id?'active':''}" data-action="nav" data-page="${id}">${icon(ic)}<span>${label}</span></button>`).join('')}</nav><div class="sidebar-bottom"><div class="privacy-note">${icon('lock')}${privacy}</div></div></aside><main class="main"><header class="topbar"><button type="button" class="icon-button mobile-menu" aria-label="打开导航" data-action="menu">${icon('menu')}</button><div class="top-search">${icon('search')}<input id="search" type="search" placeholder="搜索院校、项目或备注…" value="${esc(query)}" aria-label="搜索项目" /></div><div class="user-pill"><span class="avatar">我</span><span>本地使用者</span></div></header><div class="content">${loadError?`<div class="demo-banner">${esc(loadError)}</div>`:''}${state.demo?`<div class="demo-banner"><span>当前显示演示数据，院校名称和日期均为示例。</span><button type="button" data-action="start">开始我的规划 →</button></div>`:''}${renderPage()}<div class="footer-note">${footer}</div></div></main></div>${modal?renderModal():''}`;
   const search=document.getElementById('search');if(search && document.activeElement?.id==='search')search.focus();
 }
@@ -98,7 +98,7 @@ function renderInterviews(){const list=state.projects.filter(p=>p.status==='inte
 function renderSettingsBase(){
   const desktop=!!window.desktopAPI;
   const desktopCards=desktop?`<section class="panel settings-card"><h3>系统提醒</h3><p>关闭窗口后应用会留在系统托盘，提醒仍可触发。完全退出后，错过的提醒会在下次启动时补发。${desktopInfo?.notificationsSupported===false?'当前系统报告不支持通知。':''}</p><button class="btn" data-action="test-notification">${icon('calendar')} 发送测试通知</button><label class="settings-toggle"><input id="auto-launch" type="checkbox" ${desktopInfo?.autoLaunch?'checked':''} ${desktopInfo&&['win32','darwin'].includes(desktopInfo.platform)?'':'disabled'} /> 开机启动应用</label></section><section class="panel settings-card"><h3>本机数据目录</h3><p>清单与上传文件存放在：<br><code class="data-path">${esc(desktopInfo?.dataPath||'正在读取…')}</code></p><button class="btn" data-action="open-data-directory">打开数据目录</button><p>完整备份时，请先从托盘退出应用，再复制整个目录。</p></section>`:'';
-  return `${header('设置与数据',desktop?'清单和材料文件保存在当前电脑的应用数据目录。':'项目清单与上传文件保存在当前浏览器。')}<div class="settings-grid">${desktopCards}<section class="panel settings-card"><h3>导出清单</h3><p>JSON 包含项目、材料清单和提醒，不包含上传的文件。${desktop?'完整备份请复制本机数据目录。':'文件请在材料库逐一下载。'}</p><button class="btn" data-action="export">${icon('download')} 导出清单 JSON</button></section><section class="panel settings-card"><h3>导入清单</h3><p>导入 JSON 会替换清单和提醒，并删除当前存储中的上传文件。请先备份重要文件。</p><button class="btn" data-action="import">${icon('upload')} 选择 JSON</button></section><section class="panel settings-card"><h3>清空本机数据</h3><p>删除项目、材料清单、提醒及全部上传文件。此操作不能撤销。</p><button class="btn btn-danger" data-action="clear">${icon('trash')} 清空数据</button></section><section class="panel settings-card"><h3>隐私与适用范围</h3><p>本版本无登录、后端、分析脚本或远程同步。${desktop?'每个系统账户使用自己的应用数据目录。':'不同浏览器配置文件的数据相互独立。'}</p></section></div>`;
+  return `${header('设置与数据',desktop?'清单、材料和咨询记录保存在当前电脑的应用数据目录。':'项目清单与上传文件保存在当前浏览器。')}<div class="settings-grid">${desktopCards}<section class="panel settings-card"><h3>导出清单</h3><p>JSON 包含项目、材料清单和提醒，不包含上传的文件。${desktop?'完整备份请复制本机数据目录。':'文件请在材料库逐一下载。'}</p><button class="btn" data-action="export">${icon('download')} 导出清单 JSON</button></section><section class="panel settings-card"><h3>导入清单</h3><p>导入 JSON 会替换清单和提醒，并删除当前存储中的上传文件。请先备份重要文件。</p><button class="btn" data-action="import">${icon('upload')} 选择 JSON</button></section><section class="panel settings-card"><h3>清空本机数据</h3><p>删除项目、材料清单、提醒、咨询资料、API 配置、对话历史及全部上传文件。此操作不能撤销。</p><button class="btn btn-danger" data-action="clear">${icon('trash')} 清空数据</button></section><section class="panel settings-card"><h3>隐私与适用范围</h3><p>本版本无登录、后端、分析脚本或远程同步。${desktop?'每个系统账户使用自己的应用数据目录。':'不同浏览器配置文件的数据相互独立。'}</p></section></div>`;
 }
 function renderSettings(){
   return renderSettingsBase().replace('<div class="settings-grid">', `${renderApiSettings()}<div class="settings-grid">`);
@@ -132,7 +132,7 @@ function openModal(value){modal=value;render();document.querySelector('.modal [a
 function closeModal(){modal=null;render();}
 document.addEventListener('click',async e=>{
   const button=e.target.closest('[data-action]');if(!button)return;const action=button.dataset.action,id=button.dataset.id;
-  if(await handleConsultAction(action))return;
+  if(await handleConsultAction(action,button))return;
   if(action==='close-backdrop' && e.target!==button)return;
   if(action==='nav'){page=button.dataset.page;document.getElementById('sidebar')?.classList.remove('open');render();window.scrollTo(0,0);}
   else if(action==='clear-search'){query='';render();notify('筛选已清除');}
@@ -160,7 +160,7 @@ document.addEventListener('click',async e=>{
   else if(action==='confirm-delete-material'){try{await window.localFiles.removeForMaterial(id);attachments=attachments.filter(x=>x.materialId!==id);state.materials=state.materials.filter(x=>x.id!==id);persist();closeModal();notify('材料条目及文件已删除');}catch(error){notify(`删除失败：${error.message}`);}}
   else if(action==='delete-file')openModal({kind:'confirm-file-delete',id});
   else if(action==='confirm-delete-file'){try{await window.localFiles.remove(id);attachments=attachments.filter(x=>x.id!==id);closeModal();notify('文件已删除');}catch(error){notify(`删除失败：${error.message}`);}}
-  else if(action==='clear'){if(confirm('清空项目、材料条目、提醒、咨询资料、API 配置及所有上传文件？此操作无法撤销。')){try{await window.localFiles.clearAll();attachments=[];await clearAllConsult();}catch(error){notify(`无法清理本机数据：${error.message}`);return;}state={version:1,demo:false,projects:[],materials:DEFAULT_MATERIALS.map(m=>({...m})),reminders:[]};persist();page='dashboard';render();notify('本机数据已清空');}}
+  else if(action==='clear'){if(confirm('清空项目、材料条目、提醒、咨询资料、AI 对话历史、API 配置及所有上传文件？此操作无法撤销。')){try{await window.localFiles.clearAll();attachments=[];await clearAllConsult();}catch(error){notify(`无法清理本机数据：${error.message}`);return;}state={version:1,demo:false,projects:[],materials:DEFAULT_MATERIALS.map(m=>({...m})),reminders:[]};persist();page='dashboard';render();notify('本机数据已清空');}}
   else if(action==='export')exportData();
   else if(action==='import')document.getElementById('import-file').click();
 });

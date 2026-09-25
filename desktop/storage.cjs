@@ -86,6 +86,34 @@ class LocalStore {
     return record;
   }
 
+  async readAttachmentText(id) {
+    const record = this.getAttachment(id);
+    const extension = path.extname(record.name).toLowerCase();
+    if (!['.md', '.markdown', '.txt', '.pdf', '.docx'].includes(extension)) {
+      throw new Error('目前支持 Markdown、TXT、PDF 和 DOCX 文件');
+    }
+    if (!Number.isFinite(record.size) || record.size > 25 * 1024 * 1024) {
+      throw new Error('文件超过 25 MB，未读取');
+    }
+    const buffer = await fs.readFile(this.filePath(id));
+    let text;
+    if (extension === '.pdf') {
+      const { PDFParse } = await import('pdf-parse');
+      const parser = new PDFParse({ data: new Uint8Array(buffer) });
+      try { text = (await parser.getText()).text; }
+      finally { await parser.destroy(); }
+    } else if (extension === '.docx') {
+      const mammoth = require('mammoth');
+      text = (await mammoth.extractRawText({ buffer })).value;
+    } else {
+      text = buffer.toString('utf8');
+    }
+    text = String(text || '').replace(/\u0000/g, '').trim();
+    if (!text) throw new Error('文件中没有可导入的文本');
+    if (text.length > 90_000) return text.slice(0, 90_000) + '\n\n[文件较长，已截取前 90,000 个字符]';
+    return text;
+  }
+
   addAttachment(sourcePath, materialId, replaceId) {
     return this.enqueue(async () => {
       if (typeof materialId !== 'string' || !materialId || materialId.length > 100) throw new Error('材料条目标识无效');

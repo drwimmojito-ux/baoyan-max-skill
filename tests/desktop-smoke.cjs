@@ -65,14 +65,23 @@ async function main() {
       input.value = '保研';
       input.dispatchEvent(new Event('input', { bubbles: true }));
       const after = document.querySelectorAll('.source-card').length;
+      document.querySelector('[data-action="profile-toggle"]').click();
+      const profileVisible = getComputedStyle(document.querySelector('.consult-profile-drawer')).display !== 'none';
+      document.querySelector('[data-action="profile-toggle"]').click();
+      document.querySelector('[data-action="toggle-history"]').click();
+      const historyVisible = !!document.querySelector('.consult-history-drawer');
+      document.querySelector('[data-action="toggle-history"]').click();
       document.querySelector('#profile-markdown').value = '# 测试资料';
       document.querySelector('#profile-markdown').dispatchEvent(new Event('input', { bubbles: true }));
       document.querySelector('[data-action="save-profile"]').click();
       await new Promise(resolve => setTimeout(resolve, 150));
-      return { before, after, saved: (await window.desktopAPI.loadConsult()).profile };
+      return { before, after, profileVisible, historyVisible, questionWidth: document.querySelector('#consult-question').getBoundingClientRect().width, saved: (await window.desktopAPI.loadConsult()).profile };
     })()`);
     assert.equal(consult.before, 35, '飞跃手册索引未全部加载');
     assert.ok(consult.after > 0 && consult.after < consult.before, '手册关键词查询未生效');
+    assert.equal(consult.profileVisible, true, '个人资料侧栏无法展开');
+    assert.equal(consult.historyVisible, true, '对话历史面板无法展开');
+    assert.ok(consult.questionWidth > 600, '提问区域未占据主工作区');
     assert.equal(consult.saved, '# 测试资料', '个人资料未写入本机目录');
     const received = [];
     apiServer = http.createServer(async (req, res) => {
@@ -85,16 +94,38 @@ async function main() {
     await new Promise(resolve => apiServer.listen(0, '127.0.0.1', resolve));
     const apiPort = apiServer.address().port;
     const apiResult = await evaluate(`(async () => {
-      const config = await window.desktopAPI.saveApiConfig({ baseUrl: 'http://127.0.0.1:${apiPort}/v1', model: 'test-model', apiKey: 'local-test-key' });
-      const answer = await window.desktopAPI.askConsult({ question: '测试问题', profile: '# 测试资料', includeProfile: false, sourceContext: '手册索引' });
-      return { config, answer };
+      document.querySelector('[data-action="nav"][data-page="settings"]').click();
+      await new Promise(resolve => setTimeout(resolve, 40));
+      document.querySelector('#api-base-url').value = 'http://127.0.0.1:${apiPort}/v1';
+      document.querySelector('#api-model').value = 'test-model';
+      document.querySelector('#api-key').value = 'local-test-key';
+      document.querySelector('[data-action="save-api"]').click();
+      for (let i = 0; i < 50 && !(await window.desktopAPI.loadConsult()).hasKey; i += 1) await new Promise(resolve => setTimeout(resolve, 50));
+      const config = await window.desktopAPI.loadConsult();
+      document.querySelector('[data-action="nav"][data-page="consult"]').click();
+      await new Promise(resolve => setTimeout(resolve, 50));
+      const input = document.querySelector('#consult-question');
+      input.value = 'site:moe.gov.cn 2026 研究生招生管理规定';
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+      document.querySelector('#consult-form').requestSubmit();
+      for (let i = 0; i < 600 && document.querySelector('[data-action="send-api"]')?.disabled; i += 1) await new Promise(resolve => setTimeout(resolve, 100));
+      const history = await window.desktopAPI.loadConsult();
+      return {
+        config,
+        answer: document.querySelector('.chat-message.assistant pre')?.textContent || document.querySelector('.chat-error')?.textContent || '',
+        sources: [...document.querySelectorAll('.chat-message.assistant .consult-web-sources a')].map(link => link.href),
+        savedMessages: history.conversations.find(item => item.id === history.activeConversationId)?.messages || []
+      };
     })()`);
     assert.equal(apiResult.config.hasKey, true, '桌面版未安全保存 API Key');
     assert.equal(JSON.stringify(apiResult.config).includes('local-test-key'), false, 'API Key 不应返回给页面');
     assert.equal(apiResult.answer, '本机接口测试回答');
+    assert.ok(apiResult.sources.length > 0, '搜索来源未显示在咨询对话中');
+    assert.deepEqual(apiResult.savedMessages.map(message => message.role), ['user', 'assistant'], '咨询对话未保存在本机历史');
     assert.equal(received[0].url, '/v1/chat/completions');
     assert.equal(received[0].authorization, 'Bearer local-test-key');
     assert.equal(JSON.stringify(received[0].body).includes('测试资料'), false, '默认请求不应附带个人资料');
+    assert.match(received[0].body.messages[0].content, /本次联网搜索结果/, '联网搜索结果没有交给已配置的 AI');
     await evaluate('window.desktopAPI.clearApiConfig()');
     await evaluate(`(async () => { document.querySelector('[data-action="nav"][data-page="dashboard"]').click(); await new Promise(resolve => setTimeout(resolve, 30)); })()`);
     await evaluate(`(async () => {
