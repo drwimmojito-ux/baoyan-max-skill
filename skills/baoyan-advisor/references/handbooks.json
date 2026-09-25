@@ -1,0 +1,352 @@
+[
+  {
+    "name": "HEU 4系保研手册",
+    "institution": "哈尔滨工程大学（院系手册）",
+    "tier": "211",
+    "url": "https://heu4-baoyan.github.io/heu4-baoyan/baoyan/",
+    "type": "国内推免",
+    "status": "verified",
+    "scope": "保研案例；首页可见 2026 届自动化、机器人、人工智能等案例。",
+    "limit": "案例属于特定院系和届别，不能外推其他学校。"
+  },
+  {
+    "name": "深圳大学飞跃手册·保研",
+    "institution": "深圳大学",
+    "tier": "其他",
+    "url": "https://szu-feiyue.github.io/baoyan/",
+    "type": "国内推免",
+    "status": "verified",
+    "scope": "保研栏目；网站另含留学、考研、就业栏目。",
+    "limit": "只引用对应栏目，不混用海外申请案例。"
+  },
+  {
+    "name": "南方科技大学飞跃手册",
+    "institution": "南方科技大学",
+    "tier": "其他",
+    "url": "https://sustech-application.com/",
+    "type": "综合/需分栏",
+    "status": "verified",
+    "scope": "飞跃经验入口；首页另列材料系、生物医学工程保研手册。",
+    "limit": "逐篇确认保研或海外申请；首页外链文档未逐篇核查。"
+  },
+  {
+    "name": "清华大学飞跃手册",
+    "institution": "清华大学",
+    "tier": "985",
+    "url": "https://feiyue.online/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "海外申请准备、案例与资料检索。",
+    "limit": "主要是出国申请内容，不作为国内推免规则依据。"
+  },
+  {
+    "name": "USTC 飞跃网站",
+    "institution": "中国科学技术大学",
+    "tier": "985",
+    "url": "https://www.ustcflyer.com/welcome",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "海外申请信息、流程和经验。",
+    "limit": "需按具体页面确认申请类型，不作为当年招生规则。"
+  },
+  {
+    "name": "SJTU-Application",
+    "institution": "上海交通大学",
+    "tier": "985",
+    "url": "https://survivesjtu.github.io/SJTU-Application/",
+    "type": "综合/需分栏",
+    "status": "verified",
+    "scope": "上海交大本科生申请经验与材料准备入口。",
+    "limit": "内容跨届，时效信息应回到当年官方通知。"
+  },
+  {
+    "name": "华中科技大学 OEI/SES 飞跃手册",
+    "institution": "华中科技大学（院系/组织）",
+    "tier": "985",
+    "url": "https://hust-feiyue.github.io/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "技术型海外申请准备、材料和流程。",
+    "limit": "院系/组织手册，不代表全校各专业。"
+  },
+  {
+    "name": "四川大学飞跃手册",
+    "institution": "四川大学",
+    "tier": "985",
+    "url": "https://scu-flying.com/",
+    "type": "海外申请/升学",
+    "status": "verified",
+    "scope": "留学申请和升学经验入口。",
+    "limit": "具体专业、年份和文章需逐页核查。"
+  },
+  {
+    "name": "山东大学飞跃手册",
+    "institution": "山东大学",
+    "tier": "985",
+    "url": "https://sdu-application.github.io/sduapplication.github.io/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "留学申请经验与流程信息。",
+    "limit": "经验与官方招生规则分开使用。"
+  },
+  {
+    "name": "湖南大学飞跃手册",
+    "institution": "湖南大学",
+    "tier": "985",
+    "url": "https://hnufly.gitbook.io/main",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "留学申请准备和经验分享。",
+    "limit": "GitBook 内容可变，引用需记录具体页面。"
+  },
+  {
+    "name": "兰州大学飞跃手册",
+    "institution": "兰州大学",
+    "tier": "985",
+    "url": "https://lzu-feiyue.github.io/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "留学申请经验和资料。",
+    "limit": "不据此推断其他学校的录取概率。"
+  },
+  {
+    "name": "中山大学数学学院飞跃手册",
+    "institution": "中山大学数学学院",
+    "tier": "985",
+    "url": "https://guanruchen03.github.io/sysu-mathabroad/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "数学学院海外申请经验。",
+    "limit": "只适用于对应学院语境。"
+  },
+  {
+    "name": "中国海洋大学飞跃手册",
+    "institution": "中国海洋大学",
+    "tier": "985",
+    "url": "https://winterccc.github.io/feiyue-OUC/",
+    "type": "综合/需分栏",
+    "status": "verified",
+    "scope": "留学、升学、就业经验入口。",
+    "limit": "页面包含多个主题，只引用相关栏目。"
+  },
+  {
+    "name": "华东理工大学飞跃手册",
+    "institution": "华东理工大学",
+    "tier": "211",
+    "url": "https://ecust-leap.github.io/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "首页显示手册迁移信息。",
+    "limit": "需跟随迁移地址核查正文。"
+  },
+  {
+    "name": "海南大学飞跃手册",
+    "institution": "海南大学",
+    "tier": "211",
+    "url": "https://hainanu-application.github.io/",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "留学申请经验和流程入口。",
+    "limit": "具体页面与年份需逐项核查。"
+  },
+  {
+    "name": "FZU-RUN",
+    "institution": "福州大学",
+    "tier": "211",
+    "url": "https://run.west2.online/",
+    "type": "综合/需分栏",
+    "status": "verified",
+    "scope": "本科生留学、保研、考研和就业经验。",
+    "limit": "经验分享不等于学校官方政策。"
+  },
+  {
+    "name": "东南大学飞跃手册",
+    "institution": "东南大学",
+    "tier": "985",
+    "url": "https://github.com/SEU-Application/SEUapplication",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "GitHub 仓库可访问；案例文件包含 2018–2020 届海外申请个案。",
+    "limit": "历史海外申请案例，不用于国内推免判断或当前招生规则。"
+  },
+  {
+    "name": "中南大学计算机学院飞跃手册",
+    "institution": "中南大学计算机学院",
+    "tier": "985",
+    "url": "https://github.com/FeijiangHan/CSU-Application-Handbook",
+    "type": "海外申请",
+    "status": "verified",
+    "scope": "README 明确为计算机及相关方向留学申请手册，含准备、选校、材料、推荐信和录取后事项；仓库最近推送为 2025-09-21。",
+    "limit": "海外申请经验，不用于国内推免；具体经验仍按个案和页面年份判断。"
+  },
+  {
+    "name": "华南理工大学飞跃手册",
+    "institution": "华南理工大学",
+    "tier": "985",
+    "url": "https://github.com/MengyangGao/flying.gzic.online",
+    "type": "综合升学与就业经验",
+    "status": "verified",
+    "scope": "GitHub README/SUMMARY 含保研直博、考研、就业和出国栏目；推免及海外案例涉及 2018–2021 届。",
+    "limit": "历史案例；仓库声明不要外传个人申请信息，只保留链接和章节索引，不复制个案。"
+  },
+  {
+    "name": "江南大学计算机保研经验项目",
+    "institution": "江南大学计算机相关专业",
+    "tier": "211",
+    "url": "https://jnu-baoyan.github.io/cs/",
+    "type": "国内推免经验",
+    "status": "verified",
+    "scope": "网站为江南大学 CS 保研仓库，收录历届经验；页面含 2025 年夏令营及预推免文章。",
+    "limit": "仅适用于计算机相关专业；往届材料不代表当年招生要求。"
+  },
+  {
+    "name": "华南理工大学 CS 保研经验",
+    "institution": "华南理工大学计算机相关专业",
+    "tier": "985",
+    "url": "https://github.com/fjchange/SCUT_CS_baoyan",
+    "type": "国内推免经验",
+    "status": "verified",
+    "scope": "公开仓库含保研基础知识、接收函、导师选择和约 2020 届夏令营/预推免经验。",
+    "limit": "历史计算机专业经验，提交前按具体文章年份复核，不作当前政策依据。"
+  },
+  {
+    "name": "AutoSummerCamp 2023",
+    "institution": "多所高校自动化相关项目",
+    "tier": "985/211 等",
+    "url": "https://github.com/auto-baoyan/AutoSummerCamp",
+    "type": "国内推免信息与经验汇编",
+    "status": "verified",
+    "scope": "README 明确为 2023 年自动化推免通知、实验室招生信息和经验汇总。",
+    "limit": "2023 年历史归档；招生信息必须回到当年及当前官方通知核验。"
+  },
+  {
+    "name": "BAOYAN 推免材料与面经",
+    "institution": "多校个案汇编",
+    "tier": "多校",
+    "url": "https://github.com/HymanJi/BAOYAN",
+    "type": "国内推免材料与面经",
+    "status": "verified",
+    "scope": "仓库包含简历、个人陈述、推荐信、专业课和面试经验等目录；更新主要集中在 2023 年。",
+    "limit": "历史个案和材料参考；不代表当前要求，也不用于录取概率统计。"
+  },
+  {
+    "name": "华中科技大学电气飞跃手册",
+    "institution": "华中科技大学（电气飞跃手册）",
+    "tier": "985",
+    "url": "https://github.com/LHYi/Feiyue_for_ECE",
+    "type": "海外申请",
+    "status": "limited",
+    "scope": "README 与附件题为“华中大电气飞跃手册”，主题为留学准备；仓库最后推送为 2020-06-06，但目前只将 README/附件入口作为索引。",
+    "limit": "正文经验需逐篇打开核查；历史海外申请参考，不用于当前招生政策。"
+  },
+  {
+    "name": "东南大学电类专业保研外校指导手册",
+    "institution": "东南大学电类专业",
+    "tier": "985",
+    "url": "https://github.com/catsostrong/ambition-cookbook",
+    "type": "国内推免经验",
+    "status": "limited",
+    "scope": "公开仓库描述和 README 标题指向东南大学电类专业保研外校指导手册；更新时间显示为 2020 年。",
+    "limit": "本轮未定位可引用的手册正文，暂不能作为推免经验依据。"
+  },
+  {
+    "name": "复旦数院飞跃手册",
+    "institution": "复旦大学数学科学学院",
+    "tier": "985",
+    "url": "https://github.com/iwannabethe/Flight-Manual-FudanSMS",
+    "type": "综合升学/目录已核查",
+    "status": "limited",
+    "scope": "仓库目录包含保研、出国、工作和考研栏目；保研下的本校及其他院校目录目前只有占位文件。",
+    "limit": "目前没有可用的保研案例正文；不能用作推免经验依据。"
+  },
+  {
+    "name": "华中科技大学计算机 2023 飞跃手册",
+    "institution": "华中科技大学计算机学院",
+    "tier": "985",
+    "url": "https://github.com/HUST-CS-Feiyue-Committee/CS23FeiyueBook",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "仓库自述为 2023 届计算机飞跃手册，但 GitHub 当前标记仓库为空。",
+    "limit": "无可读正文；不得用于事实或经验依据，只有在仓库恢复内容后再核查。"
+  },
+  {
+    "name": "南开大学飞跃手册",
+    "institution": "南开大学",
+    "tier": "985",
+    "url": "https://github.com/NKU-feiyue/docs",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "公开仓库可访问，但 README 只有手册名称；对应 GitHub Pages 当前为 Site not found。",
+    "limit": "尚无可读手册正文，不作为事实或经验依据。"
+  },
+  {
+    "name": "浙江大学数院飞跃手册（PDF）",
+    "institution": "浙江大学数学学院",
+    "tier": "985",
+    "url": "https://www.math.zju.edu.cn/_upload/article/files/99/e1/32b8399349af89f05033bf19a32e/4fd486a5-8a4e-47f0-a9c1-9fdba8cae593.pdf",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "清华飞跃手册友链所列院系 PDF。",
+    "limit": "PDF 可访问性、年份和具体内容待核查。"
+  },
+  {
+    "name": "浙江大学外语学院飞跃手册（PDF）",
+    "institution": "浙江大学外国语学院",
+    "tier": "985",
+    "url": "https://www.sis.zju.edu.cn/_upload/article/files/d1/4f/4bdc41fb43c998f58d9ea03b77c5/1af0ee6f-ca7e-4a9f-b100-b3161378590c.pdf",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "清华飞跃手册友链所列院系 PDF。",
+    "limit": "PDF 可访问性、年份和具体内容待核查。"
+  },
+  {
+    "name": "浙江大学电气学院飞跃手册（PDF）",
+    "institution": "浙江大学电气工程学院",
+    "tier": "985",
+    "url": "https://ee.zju.edu.cn/_upload/article/files/e5/cb/875540014b9489d2cec796955ea7/d1051aae-5958-4137-9ebd-f5b59fea0230.pdf",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "清华飞跃手册友链所列院系 PDF。",
+    "limit": "PDF 可访问性、年份和具体内容待核查。"
+  },
+  {
+    "name": "武汉大学数统飞跃手册",
+    "institution": "武汉大学数学与统计相关专业",
+    "tier": "985",
+    "url": "https://www.yuque.com/2020whumathstat/fly-sheet",
+    "type": "海外申请/待核查",
+    "status": "candidate",
+    "scope": "清华飞跃手册友链列出的数统经验手册。",
+    "limit": "页面可访问性和文章年份待核查。"
+  },
+  {
+    "name": "NWU 多校升学经验汇编",
+    "institution": "多校经验汇编",
+    "tier": "多校",
+    "url": "https://github.com/nwuzmedoutlook/career-plan",
+    "type": "国内推免及其他升学经验/待核查",
+    "status": "candidate",
+    "scope": "README 声称汇集多所高校升学经验，但仓库根目录尚未定位到具体条目。",
+    "limit": "需打开实际条目并核对学校、专业、年份后再引用。"
+  },
+  {
+    "name": "计算机保研招生通知与经验汇编 2024",
+    "institution": "多校计算机项目",
+    "tier": "多校",
+    "url": "https://github.com/jsjby/jsjby_2024",
+    "type": "国内推免通知/历史",
+    "status": "candidate",
+    "scope": "仓库含 README 和 PDF；README 链接至其他年份或分类仓库。",
+    "limit": "需核对被链接资料与年份，暂不将其作为已验证内容。"
+  },
+  {
+    "name": "Baoyan Beacon 保研信息索引",
+    "institution": "多校信息索引",
+    "tier": "多校",
+    "url": "https://github.com/HuiBinLai/baoyan-beacon",
+    "type": "保研信息索引/待核查",
+    "status": "candidate",
+    "scope": "公开仓库介绍信息聚合与自动扫描设计。",
+    "limit": "具体通知条目、来源链接和更新时间未核查，不能作为招生事实来源。"
+  }
+]
