@@ -1,0 +1,14 @@
+{
+  "name": "baoyan-workbench",
+  "version": "0.1.0",
+  "private": true,
+  "description": "本地优先的保研申请工作台",
+  "main": "desktop/main.cjs",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron ."
+  },
+  "devDependencies": {
+    "electron": "44.4.5"
+  }
+}
