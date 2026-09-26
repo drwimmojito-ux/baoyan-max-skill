@@ -10,6 +10,8 @@
 
 环境：Windows 电脑，Node.js 与 npm。首次安装依赖时需要联网；本地管理功能以后不依赖网络。桌面版 AI 咨询、网页搜索与打开在线手册链接需要联网。
 
+Windows 上也可双击仓库根目录的 `启动保研工作台.cmd`。如果尚未安装桌面依赖，脚本会先运行 `npm install`，再启动工作台。
+
 ```powershell
 npm install
 npm start
